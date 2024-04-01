@@ -32,12 +32,12 @@ int main() {
 #endif
 
   mdns_cpp::Logger::setLoggerSink([](const std::string& log_msg) {
-    std::cout << "MDNS_LIBRARY: " << log_msg;
+    std::cout << "❓ MDNS_QUERY: " << log_msg;
     std::flush(std::cout);
   });
 
   mdns_cpp::mDNS mdns;
-  const std::string service = "_http._tcp.local.";
+  const std::string service = "_jzp._mpam.local.";
 
   mdns.executeQuery(service);
 

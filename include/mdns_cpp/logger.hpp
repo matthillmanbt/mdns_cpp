@@ -4,6 +4,7 @@
 #include <iostream>
 #include <sstream>
 #include <string>
+#include "../src/mdns.h"
 
 namespace mdns_cpp {
 
@@ -36,3 +37,5 @@ class LogMessage {
 };
 
 }  // namespace mdns_cpp
+
+std::ostream& operator<<(std::ostream& out, const mdns_string_t& s);

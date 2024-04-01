@@ -36,3 +36,5 @@ build/
 
 debug.log
 .vs/*
+
+.cache/*

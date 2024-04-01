@@ -1,16 +1,36 @@
 #pragma once
 
 #include <cstdint>
+#include <vector>
+#include <ostream>
+#ifdef _WIN32
+#include <Winsock2.h>
+#include <Ws2tcpip.h>
+#else
+#include <netinet/in.h>
+#include <sys/socket.h>
+#endif
+
+#include "../src/mdns.h"
 
 namespace mdns_cpp {
 
 class ServiceRecord {
  public:
-  const char *service;
-  const char *hostname;
-  uint32_t address_ipv4;
-  uint8_t *address_ipv6;
+  mdns_string_t service;
+  mdns_string_t hostname;
+  mdns_string_t service_instance;
+  mdns_string_t hostname_qualified;
+
+  struct sockaddr_in address_ipv4;
+  struct sockaddr_in6 address_ipv6;
   uint16_t port;
+
+  mdns_record_t record_ptr;
+  mdns_record_t record_srv;
+  mdns_record_t record_a;
+  mdns_record_t record_aaaa;
+  std::vector<mdns_record_t> txt_records;
 };
 
 }  // namespace mdns_cpp

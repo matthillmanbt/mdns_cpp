@@ -1,10 +1,15 @@
 #pragma once
 
-#include <functional>
 #include <string>
+#include <map>
 #include <thread>
-
-#include "mdns_cpp/defs.hpp"
+#ifdef _WIN32
+#include <Winsock2.h>
+#include <Ws2tcpip.h>
+#else
+#include <sys/socket.h>
+#include <netinet/in.h>
+#endif
 
 struct sockaddr;
 
@@ -21,7 +26,7 @@ class mDNS {
   void setServiceHostname(const std::string &hostname);
   void setServicePort(std::uint16_t port);
   void setServiceName(const std::string &name);
-  void setServiceTxtRecord(const std::string &text_record);
+  void setServiceTxtRecords(const std::map<std::string, std::string> &text_records);
 
   void executeQuery(const std::string &service);
   void executeDiscovery();
@@ -34,15 +39,15 @@ class mDNS {
   std::string hostname_{"dummy-host"};
   std::string name_{"_http._tcp.local."};
   std::uint16_t port_{42424};
-  std::string txt_record_{};
+  std::map<std::string, std::string> txt_records_{};
 
   bool running_{false};
 
   bool has_ipv4_{false};
   bool has_ipv6_{false};
 
-  uint32_t service_address_ipv4_{0};
-  uint8_t service_address_ipv6_[16]{0};
+  struct sockaddr_in service_address_ipv4_{};
+  struct sockaddr_in6 service_address_ipv6_{};
 
   std::thread worker_thread_;
 };

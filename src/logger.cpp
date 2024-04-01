@@ -28,3 +28,10 @@ LogMessage::LogMessage() { os << ""; }
 LogMessage::~LogMessage() { Logger::LogIt(os.str()); }
 
 }  // namespace mdns_cpp
+
+std::ostream& operator<<(std::ostream& out, const mdns_string_t& s)
+{
+	out << s.str;
+
+	return out;
+}

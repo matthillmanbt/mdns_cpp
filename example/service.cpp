@@ -32,13 +32,17 @@ int main() {
 #endif
 
   mdns_cpp::Logger::setLoggerSink([](const std::string& log_msg) {
-    std::cout << "MDNS_LIBRARY: " << log_msg;
+    std::cout << "🧑‍✈️ MDNS_SERVICE: " << log_msg;
     std::flush(std::cout);
   });
 
   mdns_cpp::mDNS mdns;
 
-  mdns.setServiceHostname("AirForce1");
+  mdns.setServiceName("_jzp._mpam.local.");
+  mdns.setServiceHostname("JumpzoneProxy-mpam");
+  mdns.setServiceTxtRecords({
+    {"TXT_KEY", "TXT_VALUE"},
+  });
 
   mdns.startService();
 

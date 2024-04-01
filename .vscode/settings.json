@@ -1,14 +1,25 @@
 {
     "cSpell.words": [
-        "Jansson",
-        "Mattias",
-        "Unlicense",
+        "addrbuffer",
         "chrono",
         "cmake",
+        "entrybuffer",
+        "entrystr",
+        "ENTRYTYPE",
+        "fromaddrstr",
+        "itxt",
+        "Jansson",
+        "Mattias",
         "mdns",
         "mdnscpp",
         "mkdir",
-        "rclass"
+        "namebuffer",
+        "namestr",
+        "Nlds",
+        "rclass",
+        "sendbuffer",
+        "txtbuffer",
+        "Unlicense"
     ],
     "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
     "files.associations": {
