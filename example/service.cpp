@@ -32,21 +32,29 @@ int main() {
 #endif
 
   mdns_cpp::Logger::setLoggerSink([](const std::string& log_msg) {
-    std::cout << "🧑‍✈️ MDNS_SERVICE: " << log_msg;
+    std::cout << "🧑‍✈️ MDNS_SERVICE: " << log_msg << std::endl;
     std::flush(std::cout);
   });
 
   mdns_cpp::mDNS mdns;
 
   mdns.setServiceName("_jzp._mpam.local.");
-  mdns.setServiceHostname("JumpzoneProxy-mpam");
+  mdns.setServiceHostname("jzp-mpam");
   mdns.setServiceTxtRecords({
     {"TXT_KEY", "TXT_VALUE"},
   });
 
+  std::srand(std::time(nullptr));
+  mdns.setSRVPriorityCallback([]() {
+    return static_cast<uint16_t>(std::rand());
+  });
+  mdns.setSRVWeightCallback([]() {
+    return static_cast<uint16_t>(std::rand());
+  });
+
   mdns.startService();
 
-  while (true) {
+  while (mdns.isServiceRunning()) {
     std::this_thread::sleep_for(std::chrono::seconds(1));
   }
 

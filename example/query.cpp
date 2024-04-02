@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <thread>
+#include "mdns_cpp/defs.hpp"
 
 #ifdef _WIN32
 #include <winsock2.h>
@@ -32,17 +33,21 @@ int main() {
 #endif
 
   mdns_cpp::Logger::setLoggerSink([](const std::string& log_msg) {
-    std::cout << "❓ MDNS_QUERY: " << log_msg;
+    std::cout << "❓ MDNS_QUERY: " << log_msg << std::endl;
     std::flush(std::cout);
   });
 
   mdns_cpp::mDNS mdns;
+  // const std::string serviceHost = "jzp-mpam";
   const std::string service = "_jzp._mpam.local.";
 
-  mdns.executeQuery(service);
+  auto results = mdns.executeQuery(service, mdns_record_type::MDNS_RECORDTYPE_PTR, [](std::shared_ptr<mdns_cpp::QueryResult> result) {
+    std::cout << "❓ MDNS_QUERY: result callback " << result.get() << std::endl;
+    std::cout << "❓ MDNS_QUERY: SRV callback priority: " << result->srv.priority << std::endl;
+  });
 
-  while (true) {
-    std::this_thread::sleep_for(std::chrono::seconds(1));
+  for (const auto &result : results) {
+    std::cout << "❓ MDNS_QUERY: got result from list " << result.get() << std::endl;
   }
 
   return 0;

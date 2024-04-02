@@ -7,6 +7,7 @@
 #include "../src/mdns.h"
 
 namespace mdns_cpp {
+  struct QueryResult;
 
 class Logger {
  public:
@@ -39,3 +40,4 @@ class LogMessage {
 }  // namespace mdns_cpp
 
 std::ostream& operator<<(std::ostream& out, const mdns_string_t& s);
+std::ostream& operator<<(std::ostream& out, mdns_cpp::QueryResult *r);

@@ -11,6 +11,7 @@
 
 #include "mdns_cpp/logger.hpp"
 #include "mdns_cpp/mdns.hpp"
+#include "mdns_cpp/defs.hpp"
 
 void onInterruptHandler(int s) {
   std::cout << "Caught signal: " << s << std::endl;
@@ -32,13 +33,15 @@ int main() {
 #endif
 
   mdns_cpp::Logger::setLoggerSink([](const std::string& log_msg) {
-    std::cout << "🔭 MDNS_DISCOVERY: " << log_msg;
+    std::cout << "🔭 MDNS_DISCOVERY: " << log_msg << std::endl;
     std::flush(std::cout);
   });
 
   mdns_cpp::mDNS mdns;
 
-  mdns.executeDiscovery();
+  mdns.executeDiscovery([](std::shared_ptr<mdns_cpp::QueryResult> result) {
+    std::cout << "🔭 MDNS_DISCOVERY: discovery callback" << result;
+  });
 
   while (true) {
     std::this_thread::sleep_for(std::chrono::seconds(1));

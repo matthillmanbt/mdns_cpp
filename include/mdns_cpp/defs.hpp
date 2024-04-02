@@ -33,4 +33,13 @@ class ServiceRecord {
   std::vector<mdns_record_t> txt_records;
 };
 
+struct QueryResult {
+	std::string host;
+	std::string ipv4;
+	std::string ipv6;
+
+  mdns_record_srv_t srv;
+  std::vector<mdns_record_txt_t> txt;
+};
+
 }  // namespace mdns_cpp

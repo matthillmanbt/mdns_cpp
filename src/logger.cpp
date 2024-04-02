@@ -1,4 +1,5 @@
 #include "mdns_cpp/logger.hpp"
+#include "mdns_cpp/defs.hpp"
 
 namespace mdns_cpp {
 
@@ -32,6 +33,13 @@ LogMessage::~LogMessage() { Logger::LogIt(os.str()); }
 std::ostream& operator<<(std::ostream& out, const mdns_string_t& s)
 {
 	out << s.str;
+
+	return out;
+}
+
+std::ostream& operator<<(std::ostream& out, mdns_cpp::QueryResult *r)
+{
+	out << "[host: " << r->host << "][v4: " << r->ipv4 << "][v6: " << r->ipv6 <<"]";
 
 	return out;
 }

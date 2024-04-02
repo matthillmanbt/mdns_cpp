@@ -34,7 +34,7 @@ std::string getHostName() {
   WSADATA wsaData;
   if (WSAStartup(versionWanted, &wsaData)) {
     const auto msg = "Error: Failed to initialize WinSock";
-    MDNS_LOG << msg << "\n";
+    MDNS_LOG << msg;
     throw std::runtime_error(msg);
   }
 
