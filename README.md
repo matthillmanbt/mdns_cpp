@@ -1,5 +1,20 @@
 # mDNS-Cpp
 
+## Update
+
+This fork updates the original and cleans up the code a bit. The primary goal was to give a way to get the query results back when doing a query or discovery, and to expand the capabilities of the service.
+
+Changes:
+
+*  mdns.h updated to current and wrapper classes updated
+* Callbacks added to `executeQuery` and `executeDiscovery` to get results as they are received
+* `executeQuery` also returns the list of query results when it completes
+* Logging now uses ostream style output instead of `snprintf` and `char *` buffers
+
+Original README follows.
+
+----------------------------------------------------------------------
+
 This library provides a cross-platform mDNS and DNS-DS library in C++.
 
 Currently this library is only a C++ wrapper around Mattias Jansson ([@maniccoder](https://twitter.com/maniccoder)) [mdns.h](https://github.com/mjansson/mdns) file -> all feature credits go to him. His work is licensed with the [The Unlicense](https://github.com/mjansson/mdns/blob/master/LICENSE) license.
