@@ -1,5 +1,4 @@
 #include <signal.h>
-#include <stdio.h>
 #include <stdlib.h>
 
 #include <iostream>
@@ -40,8 +39,8 @@ int main()
 
     mdns_cpp::mDNS mdns;
 
-    mdns.setServiceName("_jzp._mpam.local.");
-    mdns.setServiceHostname("jzp-mpam");
+    mdns.setServiceName("_service._myhost.local.");
+    mdns.setServiceHostname("myhost");
     mdns.setServiceTxtRecords({
         { "TXT_KEY", "TXT_VALUE" },
     });

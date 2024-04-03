@@ -38,8 +38,7 @@ int main()
     });
 
     mdns_cpp::mDNS mdns;
-    // const std::string serviceHost = "jzp-mpam";
-    const std::string service = "_jzp._mpam.local.";
+    const std::string service = "_service._myhost.local.";
 
     auto results = mdns.executeQuery(
         service, mdns_record_type::MDNS_RECORDTYPE_PTR, [](std::shared_ptr<mdns_cpp::QueryResult> result) {
