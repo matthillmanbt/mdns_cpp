@@ -1,4 +1,2 @@
 Language: Cpp
-BasedOnStyle: Google
-Standard: Cpp11
-ColumnLimit: 120
+BasedOnStyle: Webkit
