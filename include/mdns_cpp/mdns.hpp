@@ -1,3 +1,5 @@
+#ifndef MDNS_CPP_MDNS_H__
+#define MDNS_CPP_MDNS_H__
 #pragma once
 
 #include <functional>
@@ -74,3 +76,5 @@ private:
 };
 
 } // namespace mdns_cpp
+
+#endif // MDNS_CPP_MDNS_H__

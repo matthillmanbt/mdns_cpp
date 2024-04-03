@@ -1,3 +1,5 @@
+#ifndef MDNS_CPP_LOGGER_H__
+#define MDNS_CPP_LOGGER_H__
 #pragma once
 
 #include "../../src/mdns.h"
@@ -41,3 +43,5 @@ private:
 
 std::ostream& operator<<(std::ostream& out, const mdns_string_t& s);
 std::ostream& operator<<(std::ostream& out, mdns_cpp::QueryResult* r);
+
+#endif // MDNS_CPP_LOGGER_H__

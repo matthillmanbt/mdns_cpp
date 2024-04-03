@@ -1,7 +1,8 @@
+#ifndef MDNS_CPP_DEFS_H__
+#define MDNS_CPP_DEFS_H__
 #pragma once
 
 #include <cstdint>
-#include <ostream>
 #include <vector>
 #ifdef _WIN32
 #include <Winsock2.h>
@@ -43,3 +44,5 @@ struct QueryResult {
 };
 
 } // namespace mdns_cpp
+
+#endif // MDNS_CPP_DEFS_H__

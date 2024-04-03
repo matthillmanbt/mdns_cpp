@@ -1,3 +1,5 @@
+#ifndef MDNS_CPP_UTILS_H__
+#define MDNS_CPP_UTILS_H__
 #pragma once
 
 #include <string>
@@ -19,3 +21,5 @@ std::string ipAddressToString(char* buffer, size_t capacity, const struct sockad
 std::string printableRecordType(uint16_t type);
 
 } // namespace mdns_cpp
+
+#endif // MDNS_CPP_UTILS_H__
