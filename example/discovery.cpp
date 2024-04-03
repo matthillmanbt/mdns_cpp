@@ -9,9 +9,7 @@
 #include <winsock2.h>
 #endif
 
-#include "mdns_cpp/defs.hpp"
-#include "mdns_cpp/logger.hpp"
-#include "mdns_cpp/mdns.hpp"
+#include "mdns_cpp/mdns_cpp.h"
 
 void onInterruptHandler(int s)
 {
@@ -34,14 +32,14 @@ int main()
     }
 #endif
 
-    mdns_cpp::Logger::setLoggerSink([](const std::string& log_msg) {
+    mdns_cpp::Logger::setLoggerSink([](const std::string &log_msg) {
         std::cout << "🔭 MDNS_DISCOVERY: " << log_msg << std::endl;
         std::flush(std::cout);
     });
 
     mdns_cpp::mDNS mdns;
 
-    mdns.executeDiscovery([](std::shared_ptr<mdns_cpp::QueryResult> result) {
+    mdns.executeDiscovery([](mdns_cpp::QueryResult result) {
         std::cout << "🔭 MDNS_DISCOVERY: discovery callback" << result;
     });
 

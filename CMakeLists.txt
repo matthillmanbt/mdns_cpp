@@ -25,15 +25,15 @@ target_include_directories(
                          $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
 target_sources(
   ${PROJECT_NAME}
-  PRIVATE include/mdns_cpp/macros.hpp
-          include/mdns_cpp/defs.hpp
+  PRIVATE include/mdns_cpp/defs.hpp
           include/mdns_cpp/logger.hpp
           src/logger.cpp
           src/mdns.h
           src/mdns.cpp
           include/mdns_cpp/mdns.hpp
           src/utils.cpp
-          include/mdns_cpp/utils.hpp)
+          include/mdns_cpp/utils.hpp
+          include/mdns_cpp/mdns_cpp.h)
 
 if(MSVC)
   target_compile_options(${PROJECT_NAME} PRIVATE /W4)

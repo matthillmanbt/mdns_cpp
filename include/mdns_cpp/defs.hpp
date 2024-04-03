@@ -3,6 +3,7 @@
 #pragma once
 
 #include <cstdint>
+#include <functional>
 #include <vector>
 #ifdef _WIN32
 #include <Winsock2.h>
@@ -20,8 +21,8 @@ class ServiceRecord {
 public:
     mdns_string_t service;
     mdns_string_t hostname;
-    mdns_string_t service_instance;
-    mdns_string_t hostname_qualified;
+    std::string service_instance;
+    std::string hostname_qualified;
 
     struct sockaddr_in address_ipv4;
     struct sockaddr_in6 address_ipv6;
@@ -42,6 +43,8 @@ struct QueryResult {
     mdns_record_srv_t srv;
     std::vector<mdns_record_txt_t> txt;
 };
+
+typedef std::function<void(QueryResult &)> ProcessResultFn;
 
 } // namespace mdns_cpp
 

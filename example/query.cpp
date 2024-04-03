@@ -1,15 +1,14 @@
-#include <signal.h>
-#include <stdlib.h>
-
 #include "mdns_cpp/defs.hpp"
 #include <iostream>
+#include <signal.h>
+#include <stdlib.h>
 
 #ifdef _WIN32
 #include <winsock2.h>
 #endif
 
-#include "mdns_cpp/logger.hpp"
-#include "mdns_cpp/mdns.hpp"
+#include "consts.h"
+#include "mdns_cpp/mdns_cpp.h"
 
 void onInterruptHandler(int s)
 {
@@ -32,22 +31,21 @@ int main()
     }
 #endif
 
-    mdns_cpp::Logger::setLoggerSink([](const std::string& log_msg) {
+    mdns_cpp::Logger::setLoggerSink([](const std::string &log_msg) {
         std::cout << "❓ MDNS_QUERY: " << log_msg << std::endl;
         std::flush(std::cout);
     });
 
     mdns_cpp::mDNS mdns;
-    const std::string service = "_service._myhost.local.";
 
-    auto results = mdns.executeQuery(
-        service, mdns_record_type::MDNS_RECORDTYPE_PTR, [](std::shared_ptr<mdns_cpp::QueryResult> result) {
-            std::cout << "❓ MDNS_QUERY: result callback " << result.get() << std::endl;
-            std::cout << "❓ MDNS_QUERY: SRV callback priority: " << result->srv.priority << std::endl;
+    auto results = mdns.executeQuery(SERVICE_NAME, mdns_record_type::MDNS_RECORDTYPE_PTR,
+        [](mdns_cpp::QueryResult result) {
+            std::cout << "❓ MDNS_QUERY: result callback " << result << std::endl;
+            std::cout << "❓ MDNS_QUERY: SRV callback priority: " << result.srv.priority << std::endl;
         });
 
-    for (const auto& result : results) {
-        std::cout << "❓ MDNS_QUERY: got result from list " << result.get() << std::endl;
+    for (const auto &result : results) {
+        std::cout << "❓ MDNS_QUERY: got result from list " << result << std::endl;
     }
 
     return 0;

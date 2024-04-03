@@ -8,8 +8,9 @@
 #include <winsock2.h>
 #endif
 
-#include "mdns_cpp/logger.hpp"
-#include "mdns_cpp/mdns.hpp"
+#include "consts.h"
+
+#include "mdns_cpp/mdns_cpp.h"
 
 void onInterruptHandler(int s)
 {
@@ -32,22 +33,21 @@ int main()
     }
 #endif
 
-    mdns_cpp::Logger::setLoggerSink([](const std::string& log_msg) {
+    mdns_cpp::Logger::setLoggerSink([](const std::string &log_msg) {
         std::cout << "🧑‍✈️ MDNS_SERVICE: " << log_msg << std::endl;
         std::flush(std::cout);
     });
 
-    mdns_cpp::mDNS mdns;
+    mdns_cpp::mDNS mdns(SERVICE_HOST, SERVICE_NAME, 443);
 
-    mdns.setServiceName("_service._myhost.local.");
-    mdns.setServiceHostname("myhost");
     mdns.setServiceTxtRecords({
         { "TXT_KEY", "TXT_VALUE" },
     });
 
     std::srand(std::time(nullptr));
-    mdns.setSRVPriorityCallback([]() { return static_cast<uint16_t>(std::rand()); });
-    mdns.setSRVWeightCallback([]() { return static_cast<uint16_t>(std::rand()); });
+    auto randCB = [] { return static_cast<uint16_t>(std::rand()); };
+    mdns.setSRVPriorityCallback(randCB);
+    mdns.setSRVWeightCallback(randCB);
 
     mdns.startService();
 
