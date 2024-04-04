@@ -282,11 +282,11 @@ int service_callback(int sock, const struct sockaddr *from, size_t addrlen, mdns
  * mDNS C++ wrapper
  */
 
-mDNS::mDNS(const std::string &hostname, const std::string &serviceName, std::uint16_t port)
-    : hostname_(hostname)
-    , name_(serviceName)
+mDNS::mDNS(const std::string &serviceName, std::uint16_t port)
+    : name_(serviceName)
     , port_(port)
 {
+    hostname_ = getHostName();
 }
 
 mDNS::~mDNS()

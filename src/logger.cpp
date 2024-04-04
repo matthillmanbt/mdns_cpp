@@ -34,17 +34,18 @@ LogMessage::~LogMessage() { Logger::LogIt(os.str()); }
 
 std::ostream &operator<<(std::ostream &out, const mdns_string_t &s)
 {
-    out << s.str;
+    out << std::string(s.str, s.length);
 
     return out;
 }
 
 std::ostream &operator<<(std::ostream &out, const mdns_record_srv_t &srv)
 {
-    out << srv.name.str << " "
+    out << "[SRV " << srv.name.str << " "
         << "priority " << srv.priority << " "
         << "weight " << srv.weight << " "
-        << "port " << srv.port;
+        << "port " << srv.port
+        << "]";
 
     return out;
 }
@@ -52,9 +53,9 @@ std::ostream &operator<<(std::ostream &out, const mdns_record_srv_t &srv)
 std::ostream &operator<<(std::ostream &out, const mdns_record_txt_t &txt)
 {
     if (txt.value.length) {
-        out << txt.key << " = " << txt.value;
+        out << "[TXT kv: " << txt.key << " = " << txt.value << "]";
     } else {
-        out << txt.key;
+        out << "[TXT " << txt.key << "]";
     }
 
     return out;

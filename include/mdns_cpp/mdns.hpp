@@ -23,7 +23,7 @@ namespace mdns_cpp {
 
 class mDNS {
 public:
-    mDNS(const std::string &hostname, const std::string &serviceName, std::uint16_t port);
+    mDNS(const std::string &serviceName, std::uint16_t port);
     mDNS() = default;
     ~mDNS();
 

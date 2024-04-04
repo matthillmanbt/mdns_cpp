@@ -38,7 +38,7 @@ int main()
         std::flush(std::cout);
     });
 
-    mdns_cpp::mDNS mdns(SERVICE_HOST, SERVICE_NAME, 443);
+    mdns_cpp::mDNS mdns(SERVICE_NAME, 443);
 
     mdns.setServiceTxtRecords({
         { "TXT_KEY", "TXT_VALUE" },
