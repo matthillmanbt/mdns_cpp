@@ -5,6 +5,7 @@
 #include <cstdint>
 #include <functional>
 #include <vector>
+#include <string>
 #ifdef _WIN32
 #include <Winsock2.h>
 #include <Ws2tcpip.h>
