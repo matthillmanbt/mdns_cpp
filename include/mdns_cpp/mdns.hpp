@@ -42,7 +42,7 @@ public:
     const ServiceRecord *serviceRecord() const;
     mdns_record_t currentSRV();
 
-    std::list<QueryResult> executeQuery(const std::string &service, mdns_record_type_t type, ProcessResultFn handle_result);
+    std::list<QueryResult> executeQuery(const std::string &service, mdns_record_type_t type, ProcessResultFn handle_result, long timeout_seconds = 5);
     void executeDiscovery(ProcessResultFn handle_result);
 
 private:

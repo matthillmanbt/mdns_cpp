@@ -333,7 +333,7 @@ mdns_record_t mDNS::currentSRV()
     return base;
 }
 
-std::list<QueryResult> mDNS::executeQuery(const std::string &service, mdns_record_type_t type, ProcessResultFn handle_result)
+std::list<QueryResult> mDNS::executeQuery(const std::string &service, mdns_record_type_t type, ProcessResultFn handle_result, long timeout_seconds)
 {
     int sockets[32];
     int query_id[32];
@@ -365,7 +365,7 @@ std::list<QueryResult> mDNS::executeQuery(const std::string &service, mdns_recor
     MDNS_LOG << "Reading mDNS query replies";
     do {
         struct timeval timeout;
-        timeout.tv_sec = 5;
+        timeout.tv_sec = timeout_seconds;
         timeout.tv_usec = 0;
 
         int nfds = 0;
