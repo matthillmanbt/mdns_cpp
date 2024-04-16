@@ -12,6 +12,8 @@
 #include <iphlpapi.h>
 #include <windows.h>
 #include <winsock.h>
+#include "mdns_cpp/logger.hpp"
+#include <stdexcept>
 #else
 #include <ifaddrs.h>
 #include <netdb.h>
